@@ -4,21 +4,6 @@ use drop_struct_macro_derive::DropStructMacro;
 use std::ptr;
 
 #[repr(C)]
-#[derive(Debug, Clone, Copy)]
-pub enum fil_RegisteredPoStProof {
-    StackedDrgWinning2KiBV1,
-    StackedDrgWinning8MiBV1,
-    StackedDrgWinning512MiBV1,
-    StackedDrgWinning32GiBV1,
-    StackedDrgWinning64GiBV1,
-    StackedDrgWindow2KiBV1,
-    StackedDrgWindow8MiBV1,
-    StackedDrgWindow512MiBV1,
-    StackedDrgWindow32GiBV1,
-    StackedDrgWindow64GiBV1,
-}
-
-#[repr(C)]
 #[derive(DropStructMacro)]
 pub struct fil_SnarkPostResponse {
     pub error_msg: *const libc::c_char,
