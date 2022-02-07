@@ -1,3 +1,0 @@
-[submodule "rust/window-post-snark-server"]
-	path = rust/window-post-snark-server
-	url = git@github.com:hxuchen/window-post-snark-server.git
