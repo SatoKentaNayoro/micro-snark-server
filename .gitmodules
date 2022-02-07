@@ -1,0 +1,3 @@
+[submodule "snark-ffi/rust/rust-fil-proofs"]
+	path = snark-ffi/rust/rust-fil-proofs
+	url = git@github.com:hxuchen/rust-fil-proofs.git
