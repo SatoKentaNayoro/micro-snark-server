@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package v1.status;
+
+enum ServerStatus {
+  UNKNOWN = 0;
+  FREE = 1;
+  WORKING = 2;
+  LOCKED = 3;
+}

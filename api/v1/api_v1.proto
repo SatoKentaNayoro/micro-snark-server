@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package v1;
+
+import "api_v1_status.proto";
+
+message BaseResponse {
+  string message = 1;
+  int32 status_code = 2;
+}
+
+message GetTaskResultResponse {
+  BaseResponse inner = 1;
+  bytes result = 2;
+}
+
+message DoSnarkTaskRequest {
+  string task_id = 1;
+  bytes vanilla_proof = 2;
+  bytes pub_in = 3;
+  bytes post_config = 4;
+  uint32 replicas_len = 5;
+}
+
+message LockIfFreeRequest {
+  string task_id = 1;
+}
+
+message UnlockRequest {
+  string task_id = 1;
+}
+
+message ServerStatusRequest {}
+
+message ServerStatusResponse {
+  BaseResponse inner = 1;
+  v1.status.ServerStatus status = 2;
+}
+
