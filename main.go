@@ -1,9 +1,9 @@
 package main
 
 import (
-	"micro-snark-server/snark-ffi"
+	snark_ffi "micro-snark-server/snark-ffi"
 )
 
 func main() {
-	snark_ffi.FilSnarkPost()
+	snark_ffi.SnarkPost()
 }

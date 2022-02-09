@@ -8,3 +8,4 @@ make_go:
 
 clean:
 	$(MAKE) -C ./snark-ffi/rust clean
+	rm -rf ./micro-snark-server

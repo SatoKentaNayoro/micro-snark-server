@@ -6,6 +6,7 @@ extern crate libc;
 
 use std::mem;
 use std::sync::Once;
+use log::info;
 use crate::types::{fil_PostConfig, fil_PubIn, fil_SnarkPostResponse, fil_VanillaProof, TaskInfo};
 use ffi_toolkit::{catch_panic_response, FCPResponseStatus, raw_ptr, rust_str_to_c_str};
 use crate::proofs::run_snark;
@@ -30,7 +31,7 @@ pub unsafe extern "C" fn fil_snark_post(
     -> *mut fil_SnarkPostResponse {
     catch_panic_response(|| {
         init_log();
-
+        info!("received one task");
         let mut response = fil_SnarkPostResponse::default();
         let ref task_info = TaskInfo {
             vanilla_proof_u8: vanilla_proof,

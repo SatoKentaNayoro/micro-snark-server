@@ -11,22 +11,22 @@ typedef enum {
 typedef struct {
     const char *error_msg;
     size_t proofs_len;
-    const uint8_t proofs_ptr;
+    const uint8_t *proofs_ptr;
     FCPResponseStatus status_code;
 } fil_SnarkPostResponse;
 
 typedef struct {
-    const uint8_t ptr;
+    const uint8_t *ptr;
     size_t len;
 } fil_VanillaProof;
 
 typedef struct {
-    const uint8_t ptr;
+    const uint8_t *ptr;
     size_t len;
 } fil_PubIn;
 
 typedef struct {
-    const uint8_t ptr;
+    const uint8_t *ptr;
     size_t len;
 } fil_PostConfig;
 
