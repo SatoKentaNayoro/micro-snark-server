@@ -33,17 +33,17 @@ func SnarkPost() {
 	rl := 3
 
 	vp := C.fil_VanillaProof{
-		ptr: (*C.uint8_t)((unsafe.Pointer(&v))),
+		ptr: (*C.uint8_t)((unsafe.Pointer(&v[0]))),
 		len: C.size_t(len(v)),
 	}
 
 	pi := C.fil_PubIn{
-		ptr: (*C.uint8_t)((unsafe.Pointer(&p))),
+		ptr: (*C.uint8_t)((unsafe.Pointer(&p[0]))),
 		len: C.size_t(len(p)),
 	}
 
 	p_c := C.fil_PostConfig{
-		ptr: (*C.uint8_t)((unsafe.Pointer(&pc))),
+		ptr: (*C.uint8_t)((unsafe.Pointer(&pc[0]))),
 		len: C.size_t(len(pc)),
 	}
 	runtime.KeepAlive(vp)

@@ -5,6 +5,7 @@ pub mod proofs;
 extern crate libc;
 
 use std::mem;
+use std::slice::from_raw_parts;
 use std::sync::Once;
 use log::info;
 use crate::types::{fil_PostConfig, fil_PubIn, fil_SnarkPostResponse, fil_VanillaProof, TaskInfo};
@@ -29,6 +30,11 @@ pub unsafe extern "C" fn fil_snark_post(
     replicas_len: libc::size_t,
 )
     -> *mut fil_SnarkPostResponse {
+    let parts = from_raw_parts(p_i.ptr, p_i.len);
+    for v in parts {
+        println!("{}",v)
+    }
+
     catch_panic_response(|| {
         init_log();
         info!("received one task");
