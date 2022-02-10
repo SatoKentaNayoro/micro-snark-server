@@ -10,7 +10,7 @@ release: init api snark_ffi_release server
 
 unexport GOFLAGS
 
-ldflags=-X=github.com/hxuchen/micro-snark-server/build.CurrentCommit=git.$(subst -,.,$(shell git describe --always --match=NeVeRmAtCh --dirty 2>/dev/null || git rev-parse --short HEAD 2>/dev/null))
+ldflags=-X=micro-snark-server/build.CurrentCommit=git.$(subst -,.,$(shell git describe --always --match=NeVeRmAtCh --dirty 2>/dev/null || git rev-parse --short HEAD 2>/dev/null))
 ifneq ($(strip $(LDFLAGS)),)
 	ldflags+=-extldflags=$(LDFLAGS)
 endif
