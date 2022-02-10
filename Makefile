@@ -1,7 +1,6 @@
 SHELL=/usr/bin/env bash
 
 API_PROTO_FILES=$(shell find api -name *.proto)
-RUST_SRC_DIR=$(PWD)/snark-ffi/rust/src
 
 .PHONY: dev
 dev: init api snark_ffi_dev server
