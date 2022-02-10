@@ -10,7 +10,7 @@ release: init api snark_ffi_release server
 
 unexport GOFLAGS
 
-ldflags=-X=github.com/filecoin-project/lotus/build.CurrentCommit=+git.$(subst -,.,$(shell git describe --always --match=NeVeRmAtCh --dirty 2>/dev/null || git rev-parse --short HEAD 2>/dev/null))
+ldflags=-X=github.com/hxuchen/micro-snark-server/build.CurrentCommit=git.$(subst -,.,$(shell git describe --always --match=NeVeRmAtCh --dirty 2>/dev/null || git rev-parse --short HEAD 2>/dev/null))
 ifneq ($(strip $(LDFLAGS)),)
 	ldflags+=-extldflags=$(LDFLAGS)
 endif
@@ -58,7 +58,7 @@ snark_ffi_dev:
 
 .PHONY: server
 server:
-	$(GOCC) build $(GOFLAGS)
+	$(GOCC) build $(GOFLAGS) -o ./bins/micro-snark-server ./cmd/snark_server
 
 .PHONY: snark_ffi_release
 snark_ffi_release:
@@ -66,11 +66,10 @@ snark_ffi_release:
 
 .PHONY: api
 api:
-	protoc --proto_path=./api \
-		   --proto_path=./api/v1 \
-		   --go_out=paths=source_relative:./api \
-		   --go-grpc_out=paths=source_relative:./api \
-		   --go-http_out=paths=source_relative:./api \
+	protoc --proto_path=. \
+		   --go_out=paths=source_relative:. \
+		   --go-grpc_out=paths=source_relative:. \
+		   --go-http_out=paths=source_relative:. \
 		   $(API_PROTO_FILES)
 
 clean:

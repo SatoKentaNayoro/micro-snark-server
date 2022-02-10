@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-package v1;
+package api.v1;
 
-option go_package = "./";
+option go_package = "micro-snark-server/api/v1;v1";
 
 enum ServerStatus {
   SERVER_UNKNOWN = 0;

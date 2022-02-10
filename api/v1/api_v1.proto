@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package v1;
+package api.v1;
 
-option go_package = "./";
+option go_package = "micro-snark-server/api/v1;v1";
 
-import "v1/api_v1_status.proto";
+import "api/v1/api_v1_status.proto";
 
 message BaseResponse {
   string message = 1;
@@ -40,7 +40,7 @@ message ServerStatusRequest {}
 
 message ServerStatusResponse {
   BaseResponse inner = 1;
-  v1.ServerStatus server_status = 2;
+  api.v1.ServerStatus server_status = 2;
 }
 
 service SnarkTaskService {
