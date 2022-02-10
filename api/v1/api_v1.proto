@@ -2,11 +2,17 @@ syntax = "proto3";
 
 package v1;
 
-import "api_v1_status.proto";
+option go_package = "./";
+
+import "v1/api_v1_status.proto";
 
 message BaseResponse {
   string message = 1;
   int32 status_code = 2;
+}
+
+message GetTaskResultRequest {
+  string task_id = 1;
 }
 
 message GetTaskResultResponse {
@@ -34,6 +40,13 @@ message ServerStatusRequest {}
 
 message ServerStatusResponse {
   BaseResponse inner = 1;
-  v1.status.ServerStatus status = 2;
+  v1.ServerStatus server_status = 2;
 }
 
+service SnarkTaskService {
+  rpc DoSnarkTask_v1(DoSnarkTaskRequest) returns (BaseResponse) {};
+  rpc LockServerIfFree(LockIfFreeRequest) returns (BaseResponse) {};
+  rpc UnlockServer(UnlockRequest) returns (BaseResponse) {};
+  rpc GetServerStatus(ServerStatusRequest) returns (ServerStatusResponse) {};
+  rpc GetTaskResult(GetTaskResultRequest) returns (GetTaskResultResponse) {};
+}

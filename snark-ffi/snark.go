@@ -1,6 +1,9 @@
+//go:build cgo
+// +build cgo
+
 package snark_ffi
 
-//#cgo LDFLAGS: -L${SRCDIR}/rust/target/debug -lsnarkcrypto
+//#cgo LDFLAGS: -L${SRCDIR} -lsnarkcrypto
 //#include "./snarkcrypto.h"
 import "C"
 import (

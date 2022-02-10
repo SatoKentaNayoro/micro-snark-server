@@ -1,10 +1,12 @@
 syntax = "proto3";
 
-package v1.status;
+package v1;
+
+option go_package = "./";
 
 enum ServerStatus {
-  UNKNOWN = 0;
-  FREE = 1;
-  WORKING = 2;
-  LOCKED = 3;
+  SERVER_UNKNOWN = 0;
+  SERVER_FREE = 1;
+  SERVER_WORKING = 2;
+  SERVER_LOCKED = 3;
 }
