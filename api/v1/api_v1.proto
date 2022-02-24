@@ -25,6 +25,11 @@ message DoSnarkTaskRequest {
   uint64 replicas_len = 5;
 }
 
+message DoSnarkTaskResponse {
+  bool ok = 1;
+  optional ErrorReason error_reason = 2;
+}
+
 message GetOneFreeServerRequest {
   string task_id = 1;
 }
@@ -34,14 +39,12 @@ message GetOneFreeServerResponse {
   optional ErrorReason error_reason = 2;
 }
 
-message ServerStatusRequest {}
-
 message ServerStatusResponse {
   api.v1.ServerStatus server_status = 2;
 }
 
 service SnarkTask {
-  rpc DoSnarkTask(DoSnarkTaskRequest) returns (google.protobuf.Empty) {
+  rpc DoSnarkTask(DoSnarkTaskRequest) returns (DoSnarkTaskResponse) {
     option (google.api.http) = {
       post: "/v1/do_snark_task"
       body: "*"
@@ -55,7 +58,7 @@ service SnarkTask {
     };
   };
 
-  rpc GetServerStatus(ServerStatusRequest) returns (ServerStatusResponse) {
+  rpc GetServerStatus(google.protobuf.Empty) returns (ServerStatusResponse) {
     option (google.api.http) = {
       get: "/v1/get_server_status"
     };

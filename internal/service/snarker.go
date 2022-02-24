@@ -14,7 +14,7 @@ var (
 	}
 )
 
-func (s *SnarkerService) DoSnarkTask(ctx context.Context, in *v1.DoSnarkTaskRequest) (*emptypb.Empty, error) {
+func (s *SnarkerService) DoSnarkTask(ctx context.Context, in *v1.DoSnarkTaskRequest) (*v1.DoSnarkTaskResponse, error) {
 	// todo
 	return nil, nil
 }
@@ -31,7 +31,7 @@ func (s *SnarkerService) GetOneFreeServer(ctx context.Context, in *v1.GetOneFree
 	return &v1.GetOneFreeServerResponse{Ok: true}, nil
 }
 
-func (s *SnarkerService) GetServerStatus(ctx context.Context, in *v1.ServerStatusRequest) (*v1.ServerStatusResponse, error) {
+func (s *SnarkerService) GetServerStatus(ctx context.Context, in *emptypb.Empty) (*v1.ServerStatusResponse, error) {
 	// todo
 	return nil, nil
 }
