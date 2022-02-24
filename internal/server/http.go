@@ -2,8 +2,11 @@ package server
 
 import (
 	"github.com/go-kratos/kratos/v2/log"
+	"github.com/go-kratos/kratos/v2/middleware/logging"
 	"github.com/go-kratos/kratos/v2/middleware/recovery"
+	"github.com/go-kratos/kratos/v2/middleware/tracing"
 	"github.com/go-kratos/kratos/v2/transport/http"
+	"github.com/gorilla/handlers"
 	v1 "micro-snark-server/api/v1"
 	"micro-snark-server/internal/conf"
 	"micro-snark-server/internal/service"
@@ -14,7 +17,14 @@ func NewHTTPServer(c *conf.Server, snarker *service.SnarkerService, logger log.L
 	var opts = []http.ServerOption{
 		http.Middleware(
 			recovery.Recovery(),
+			tracing.Server(),
+			logging.Server(logger),
 		),
+		http.Filter(handlers.CORS(
+			handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type", "Authorization"}),
+			handlers.AllowedMethods([]string{"GET", "POST", "PUT", "HEAD", "OPTIONS"}),
+			handlers.AllowedOrigins([]string{"*"}),
+		)),
 	}
 
 	if c.Http.Network != "" {

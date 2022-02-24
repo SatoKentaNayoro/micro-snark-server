@@ -6,19 +6,6 @@ import (
 	v1 "micro-snark-server/api/v1"
 )
 
-// SnarkerService is a snark task service
-type SnarkerService struct {
-	v1.UnimplementedSnarkTaskServer
-
-	Status v1.ServerStatus
-
-	log *log.Helper
-}
-
-func NewSnarkerService(logger log.Logger) *SnarkerService {
-	return &SnarkerService{Status: v1.ServerStatus_SERVER_FREE, log: log.NewHelper(logger)}
-}
-
 func (s *SnarkerService) DoSnarkTask(ctx context.Context, in *v1.DoSnarkTaskRequest) (*v1.BaseResponse, error) {
 	// todo
 	return nil, nil

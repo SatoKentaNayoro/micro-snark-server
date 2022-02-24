@@ -8,7 +8,9 @@ import (
 
 type Registry struct {
 	ClientConf *constant.ClientConfig
-	Endpoints  []*constant.ServerConfig
+	Endpoints  []constant.ServerConfig
+	Group      string
+	DataID     string
 }
 
 func LoadRegistry(path string) (reg *Registry, err error) {

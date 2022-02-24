@@ -11,6 +11,6 @@ import (
 	"micro-snark-server/internal/server"
 )
 
-func initApp(*conf.Server, *conf.Data, log.Logger) (*kratos.App, func(), error) {
+func initApp(*conf.Server, log.Logger) (*kratos.App, func(), error) {
 	panic(wire.Build(server.ProviderSet))
 }
