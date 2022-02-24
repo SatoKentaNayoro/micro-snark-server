@@ -23,7 +23,7 @@ func NewGRPCServer(c *conf.Server, greeter *service.SnarkerService, logger log.L
 		opts = append(opts, grpc.Address(c.Grpc.Addr))
 	}
 	if c.Grpc.Timeout != nil {
-		opts = append(opts, grpc.Timeout(c.Grpc.Timeout.AsDuration()))
+		opts = append(opts, grpc.Timeout(*c.Grpc.Timeout))
 	}
 	srv := grpc.NewServer(opts...)
 	v1.RegisterSnarkTaskServer(srv, greeter)

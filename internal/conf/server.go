@@ -1,10 +1,26 @@
 package conf
 
+import "time"
+
 type Server struct {
-	// HttpAddr likes 0.0.0.0:8000
-	HttpAddr string
-	// GrpcAddr likes 0.0.0.0:9000
-	GrpcAddr string
+	Http struct {
+		// Network default tcp
+		Network string
+		// Addr likes 0.0.0.0:8000
+		Addr string
+		// Default 1s
+		Timeout *time.Duration
+	}
+
+	Grpc struct {
+		// Network default tcp
+		Network string
+		// Addr likes 0.0.0.0:9000
+		Addr string
+		// Default 1s
+		Timeout *time.Duration
+	}
+
 	// If a server is locked,it will be unlocked automatically within the MaxSrvLockedTime limit
 	// MaxSrvLockedTime will be parsed to second,default 10 seconds
 	MaxSrvLockedTime int
