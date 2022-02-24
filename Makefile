@@ -76,13 +76,10 @@ api:
 clean_rust:
 	$(MAKE) -C ./snark-ffi/rust clean
 
-clean_pb_go: clean_conf
+clean_pb_go:
 	rm ./api/*/*.go
 
 bins:
 	rm -rf ./bins/micro-snark-server
-
-clean_conf:
-	rm -rf ./internal/conf/*.go
 
 clean: clean_rust clean_pb_go bins

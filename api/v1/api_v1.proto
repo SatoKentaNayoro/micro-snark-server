@@ -6,57 +6,52 @@ option go_package = "micro-snark-server/api/v1;v1";
 
 import "api/v1/api_v1_status.proto";
 import "google/api/annotations.proto";
-
-message TaskHead {
-  string miner_id = 1;
-  string task_id = 2;
-}
-
-message BaseResponse {
-  string message = 1;
-  int32 status_code = 2;
-}
+import "google/protobuf/empty.proto";
+import "api/v1/error_reason.proto";
 
 message GetTaskResultRequest {
-  TaskHead task_head = 1;
+  string task_id = 1;
 }
 
 message GetTaskResultResponse {
-  BaseResponse inner = 1;
   bytes result = 2;
 }
 
 message DoSnarkTaskRequest {
-  TaskHead task_head = 1;
+  string task_id = 1;
   bytes vanilla_proof = 2;
   bytes pub_in = 3;
   bytes post_config = 4;
-  uint32 replicas_len = 5;
+  uint64 replicas_len = 5;
 }
 
 message GetOneFreeServerRequest {
-  TaskHead task_head = 1;
+  string task_id = 1;
+}
+
+message GetOneFreeServerResponse {
+  bool ok = 1;
+  optional ErrorReason error_reason = 2;
 }
 
 message ServerStatusRequest {}
 
 message ServerStatusResponse {
-  BaseResponse inner = 1;
   api.v1.ServerStatus server_status = 2;
 }
 
 service SnarkTask {
-  rpc DoSnarkTask(DoSnarkTaskRequest) returns (BaseResponse) {
+  rpc DoSnarkTask(DoSnarkTaskRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
       post: "/v1/do_snark_task"
       body: "*"
     };
   };
 
-  rpc GetOneFreeServer(GetOneFreeServerRequest) returns (BaseResponse) {
+  rpc GetOneFreeServer(GetOneFreeServerRequest) returns (GetOneFreeServerResponse) {
     option (google.api.http) = {
       post: "/v1/get_one_free_server"
-      body: "task_head"
+      body: "task_id"
     };
   };
 
@@ -69,7 +64,7 @@ service SnarkTask {
   rpc GetTaskResult(GetTaskResultRequest) returns (GetTaskResultResponse) {
     option (google.api.http) = {
       post: "/v1/get_task_result"
-      body: "task_head"
+      body: "task_id"
     };
   };
 }

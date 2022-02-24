@@ -5,16 +5,16 @@ package api.v1;
 option go_package = "micro-snark-server/api/v1;v1";
 
 enum ServerStatus {
-  SERVER_UNKNOWN = 0;
-  SERVER_FREE = 1;
-  SERVER_WORKING = 2;
-  SERVER_LOCKED = 3;
+  UNKNOWN = 0;
+  FREE = 1;
+  WORKING = 2;
+  LOCKED = 3;
 }
 
 enum TaskStatus {
-  Task_Created = 0;
-  Task_Waiting = 1;
-  Task_Running = 2;
-  Task_Done = 3;
-  Task_Failed = 4;
+  None = 0;
+  Waiting = 1;
+  Running = 2;
+  Done = 3;
+  Failed = 4;
 }
