@@ -10,3 +10,11 @@ enum ServerStatus {
   SERVER_WORKING = 2;
   SERVER_LOCKED = 3;
 }
+
+enum TaskStatus {
+  Task_Created = 0;
+  Task_Waiting = 1;
+  Task_Running = 2;
+  Task_Done = 3;
+  Task_Failed = 4;
+}

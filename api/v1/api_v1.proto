@@ -5,6 +5,12 @@ package api.v1;
 option go_package = "micro-snark-server/api/v1;v1";
 
 import "api/v1/api_v1_status.proto";
+import "google/api/annotations.proto";
+
+message TaskHead {
+  string miner_id = 1;
+  string task_id = 2;
+}
 
 message BaseResponse {
   string message = 1;
@@ -12,7 +18,7 @@ message BaseResponse {
 }
 
 message GetTaskResultRequest {
-  string task_id = 1;
+  TaskHead task_head = 1;
 }
 
 message GetTaskResultResponse {
@@ -21,19 +27,15 @@ message GetTaskResultResponse {
 }
 
 message DoSnarkTaskRequest {
-  string task_id = 1;
+  TaskHead task_head = 1;
   bytes vanilla_proof = 2;
   bytes pub_in = 3;
   bytes post_config = 4;
   uint32 replicas_len = 5;
 }
 
-message LockIfFreeRequest {
-  string task_id = 1;
-}
-
-message UnlockRequest {
-  string task_id = 1;
+message GetOneFreeServerRequest {
+  TaskHead task_head = 1;
 }
 
 message ServerStatusRequest {}
@@ -43,10 +45,31 @@ message ServerStatusResponse {
   api.v1.ServerStatus server_status = 2;
 }
 
-service SnarkTaskService {
-  rpc DoSnarkTask_v1(DoSnarkTaskRequest) returns (BaseResponse) {};
-  rpc LockServerIfFree(LockIfFreeRequest) returns (BaseResponse) {};
-  rpc UnlockServer(UnlockRequest) returns (BaseResponse) {};
-  rpc GetServerStatus(ServerStatusRequest) returns (ServerStatusResponse) {};
-  rpc GetTaskResult(GetTaskResultRequest) returns (GetTaskResultResponse) {};
+service SnarkTask {
+  rpc DoSnarkTask(DoSnarkTaskRequest) returns (BaseResponse) {
+    option (google.api.http) = {
+      post: "/v1/do_snark_task"
+      body: "*"
+    };
+  };
+
+  rpc GetOneFreeServer(GetOneFreeServerRequest) returns (BaseResponse) {
+    option (google.api.http) = {
+      post: "/v1/get_one_free_server"
+      body: "task_head"
+    };
+  };
+
+  rpc GetServerStatus(ServerStatusRequest) returns (ServerStatusResponse) {
+    option (google.api.http) = {
+      get: "/v1/get_server_status"
+    };
+  };
+
+  rpc GetTaskResult(GetTaskResultRequest) returns (GetTaskResultResponse) {
+    option (google.api.http) = {
+      post: "/v1/get_task_result"
+      body: "task_head"
+    };
+  };
 }

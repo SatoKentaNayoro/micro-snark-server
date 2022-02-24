@@ -1,5 +1,5 @@
 SHELL=/usr/bin/env bash
-
+INTERNAL_PROTO_FILES=$(shell find internal -name *.proto)
 API_PROTO_FILES=$(shell find api -name *.proto)
 
 .PHONY: dev
@@ -67,12 +67,22 @@ snark_ffi_release:
 .PHONY: api
 api:
 	protoc --proto_path=. \
+		   --proto_path=./third_party \
 		   --go_out=paths=source_relative:. \
-		   --go-grpc_out=paths=source_relative:. \
 		   --go-http_out=paths=source_relative:. \
+		   --go-grpc_out=paths=source_relative:. \
 		   $(API_PROTO_FILES)
 
-clean:
+clean_rust:
 	$(MAKE) -C ./snark-ffi/rust clean
-	rm -rf ./micro-snark-server
+
+clean_pb_go: clean_conf
 	rm ./api/*/*.go
+
+bins:
+	rm -rf ./bins/micro-snark-server
+
+clean_conf:
+	rm -rf ./internal/conf/*.go
+
+clean: clean_rust clean_pb_go bins
