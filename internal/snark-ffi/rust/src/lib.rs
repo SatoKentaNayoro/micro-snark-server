@@ -43,9 +43,9 @@ pub unsafe extern "C" fn fil_snark_post(
         };
 
         match run_snark(task_info) {
-            Ok(r) => {
+            Ok(mut r) => {
                 response.status_code = FCPResponseStatus::FCPNoError;
-                response.proofs_ptr_0 = rust_str_to_c_str(format!("{:?}",&r[0] as *const u8));
+                response.proofs_ptr_0 = r.as_mut_ptr();
                 response.proofs_len = r.len();
                 mem::forget(r)
             }

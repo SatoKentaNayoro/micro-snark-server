@@ -8,16 +8,17 @@ use std::ptr;
 pub struct fil_SnarkPostResponse {
     pub error_msg: *const libc::c_char,
     pub proofs_len: libc::size_t,
-    pub proofs_ptr_0: *const libc::c_char,
+    pub proofs_ptr_0: *mut u8,
     pub status_code: FCPResponseStatus,
 }
 
 impl Default for fil_SnarkPostResponse {
     fn default() -> fil_SnarkPostResponse {
+        let mut v_null: Vec<u8> = vec![];
         fil_SnarkPostResponse {
             error_msg: ptr::null(),
             proofs_len: 0,
-            proofs_ptr_0: ptr::null(),
+            proofs_ptr_0: v_null.as_mut_ptr(),
             status_code: FCPResponseStatus::FCPNoError,
         }
     }
