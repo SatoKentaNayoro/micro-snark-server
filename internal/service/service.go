@@ -18,6 +18,7 @@ type SnarkerService struct {
 	SrvID   string
 	Status  *srvStatus
 	Task    *task.Task
+	Worker  *worker
 	Log     *log.Helper
 	Options struct {
 		// If a server is locked,it will be unlocked automatically within the MaxSrvLockedTime limit
@@ -32,7 +33,7 @@ type SnarkerService struct {
 }
 
 func NewSnarkerService(conf conf.Server, srvId string, logger log.Logger) *SnarkerService {
-	return &SnarkerService{SrvID: srvId, Status: NewSrvStatus(), Task: task.NewTask(), Log: log.NewHelper(logger), Options: struct {
+	return &SnarkerService{SrvID: srvId, Status: NewSrvStatus(), Task: task.NewTask(), Worker: NewWorker(), Log: log.NewHelper(logger), Options: struct {
 		MaxSrvLockedTime *time.Duration
 		MaxResRetTime    *time.Duration
 		MaxWaitExitTime  *time.Duration

@@ -11,7 +11,7 @@ typedef enum {
 typedef struct {
     const char *error_msg;
     size_t proofs_len;
-    const uint8_t *proofs_ptr;
+    const char *proofs_ptr;
     FCPResponseStatus status_code;
 } fil_SnarkPostResponse;
 
@@ -29,6 +29,7 @@ typedef struct {
     const uint8_t *ptr;
     size_t len;
 } fil_PostConfig;
+
 
 fil_SnarkPostResponse *fil_snark_post(fil_VanillaProof vanilla_proof,
                                     fil_PubIn p_i,

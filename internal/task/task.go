@@ -102,9 +102,20 @@ func (t *Task) SetFailedReason(err error) {
 	t.FailedReason = err
 }
 
+func (t *Task) SetResult(res []byte) {
+	t.Lock.Lock()
+	defer t.Lock.Unlock()
+	t.Result = res
+}
+
 func (t *Task) ResultExpired(expireTime time.Duration) bool {
 	if time.Since(t.LastUpdateAt) >= expireTime && t.TaskStatus == v1.TaskStatus_Done {
 		return true
 	}
 	return false
+}
+
+func (t *Task) Run(channel chan *Task) {
+	t.SetStatus(v1.TaskStatus_Running)
+	channel <- t
 }

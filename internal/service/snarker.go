@@ -19,8 +19,13 @@ var (
 )
 
 func (s *SnarkerService) DoSnarkTask(ctx context.Context, in *v1.DoSnarkTaskRequest) (*v1.DoSnarkTaskResponse, error) {
-	// todo
-	return nil, nil
+	id, same := s.checkTaskId(in.TaskId)
+	if !same {
+		return nil, ErrorTaskIdError(id, in.TaskId)
+	}
+	s.Task.FromReq(in)
+	s.Task.Run(s.Worker.TaskChan)
+	return &v1.DoSnarkTaskResponse{Ok: true}, nil
 }
 
 func (s *SnarkerService) GetOneFreeServer(ctx context.Context, in *v1.GetOneFreeServerRequest) (*v1.GetOneFreeServerResponse, error) {

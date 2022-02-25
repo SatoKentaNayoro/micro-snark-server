@@ -31,10 +31,6 @@ pub unsafe extern "C" fn fil_snark_post(
 )
     -> *mut fil_SnarkPostResponse {
     let parts = from_raw_parts(p_i.ptr, p_i.len);
-    for v in parts {
-        println!("{}",v)
-    }
-
     catch_panic_response(|| {
         init_log();
         info!("received one task");
@@ -49,7 +45,7 @@ pub unsafe extern "C" fn fil_snark_post(
         match run_snark(task_info) {
             Ok(r) => {
                 response.status_code = FCPResponseStatus::FCPNoError;
-                response.proofs_ptr = r.as_ptr();
+                response.proofs_ptr_0 = rust_str_to_c_str(format!("{:?}",&r[0] as *const u8));
                 response.proofs_len = r.len();
                 mem::forget(r)
             }
