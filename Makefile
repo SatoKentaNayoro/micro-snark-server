@@ -54,7 +54,7 @@ init:
 
 .PHONY: snark_ffi_dev
 snark_ffi_dev:
-	$(MAKE) -C ./snark-ffi/rust dev
+	$(MAKE) -C ./internal/snark-ffi/rust dev
 
 .PHONY: server
 server:
@@ -62,7 +62,7 @@ server:
 
 .PHONY: snark_ffi_release
 snark_ffi_release:
-	$(MAKE) -C ./snark-ffi/rust release
+	$(MAKE) -C ./internal/snark-ffi/rust release
 
 .PHONY: api
 api:
@@ -74,7 +74,7 @@ api:
 		   $(API_PROTO_FILES)
 
 clean_rust:
-	$(MAKE) -C ./snark-ffi/rust clean
+	$(MAKE) -C ./internal/snark-ffi/rust clean
 
 clean_pb_go:
 	rm ./api/*/*.go

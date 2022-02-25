@@ -11,4 +11,6 @@ enum ErrorReason {
   USER_NOT_FOUND = 0 [(errors.code) = 404];
   CONTENT_MISSING = 1 [(errors.code) = 400];
   SRV_CAN_NOT_USED_NOW = 2;
+  TASK_NOT_DONE = 3;
+  TASK_FAILED = 4;
 }

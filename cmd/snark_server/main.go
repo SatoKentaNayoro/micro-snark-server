@@ -8,7 +8,7 @@ import (
 	"github.com/go-kratos/kratos/v2/transport/grpc"
 	"github.com/go-kratos/kratos/v2/transport/http"
 	"micro-snark-server/build"
-	"micro-snark-server/snark-ffi"
+	"micro-snark-server/internal/snark-ffi"
 )
 
 var (

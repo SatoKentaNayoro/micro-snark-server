@@ -14,7 +14,10 @@ message GetTaskResultRequest {
 }
 
 message GetTaskResultResponse {
-  bytes result = 2;
+  bool ok = 1;
+  optional ErrorReason error_reason = 2;
+  optional string error_msg = 3;
+  bytes result = 4;
 }
 
 message DoSnarkTaskRequest {
